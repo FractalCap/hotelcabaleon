@@ -1,0 +1,134 @@
+﻿ARCHIVOS ORIGINALES DE HOTEL CABALEON (NO LOS USA LA PAGINA)
+
+Todo esta en esta misma carpeta, sin subcarpetas. La pagina (index.html y admin.html)
+usa las versiones optimizadas: foto-*, plato-*, clip-*, portada-*, logo-*, los PDF y las guias.
+Los archivos de esta lista son el material original enviado por el hotel: sirven de respaldo
+y NO hace falta subirlos al hosting (pesan cerca de 146 MB).
+
+Fotos originales (78):
+  - Imagrn lugsr 1.jpg
+  - Imagrn lugsr 2.jpg
+  - Imagrn lugsr 3.jpg
+  - Imagrn lugsr 4.jpg
+  - Imagrn lugsr 5.jpg
+  - Imagrn lugsr 6.jpg
+  - Imagrn lugsr 7.jpg
+  - Imagrn lugsr 8.jpg
+  - Imagrn lugsr 9.jpg
+  - Imagrn lugsr 10.jpg
+  - Imagrn lugsr 11.jpg
+  - Imagrn lugsr 12.jpg
+  - Imagrn lugsr 13.jpg
+  - Imagrn lugsr 14.jpg
+  - Imagrn lugsr 15.jpg
+  - Imagrn lugsr 16.jpg
+  - Imagrn lugsr 17.jpg
+  - Imagrn lugsr 18.jpg
+  - Imagrn lugsr 19.jpg
+  - Imagrn lugsr 20.jpg
+  - Imagrn lugsr 21.jpg
+  - Imagrn lugsr 22.jpg
+  - Imagrn lugsr 23.jpg
+  - Imagrn lugsr 24.jpg
+  - Imagrn lugsr 25.jpg
+  - Imagrn lugsr 26.jpg
+  - Imagrn lugsr 27.jpg
+  - Imagrn lugsr 28.jpg
+  - Imagrn lugsr 29.jpg
+  - Imagrn lugsr 30.jpg
+  - Imagrn lugsr 31.jpg
+  - Imagrn lugsr 32.jpg
+  - Imagrn lugsr 33.jpg
+  - Imagrn lugsr 34.jpg
+  - Imagrn lugsr 35.jpg
+  - Imagrn lugsr 36.jpg
+  - Imagrn lugsr 37.jpg
+  - Imagrn lugsr 38.jpg
+  - Imagrn lugsr 39.jpg
+  - Imagrn lugsr 40.jpg
+  - Imagrn lugsr 41.jpg
+  - Imagrn lugsr 42.jpg
+  - Imagrn lugsr 43.jpg
+  - Imagrn lugsr 44.jpg
+  - Imagrn lugsr 45.jpg
+  - Imagrn lugsr 46.jpg
+  - Imagrn lugsr 47.jpg
+  - Imagrn lugsr 48.jpg
+  - Imagrn lugsr 49.jpg
+  - Imagrn lugsr 50.jpg
+  - Imagrn lugsr 51.jpg
+  - Imagrn lugsr 52.jpg
+  - Imagrn lugsr 53.jpg
+  - Imagrn lugsr 54.jpg
+  - Imagrn lugsr 55.jpg
+  - Imagrn lugsr 56.jpg
+  - Imagrn lugsr 57.jpg
+  - Imagrn lugsr 58.jpg
+  - Imagrn lugsr 59.jpg
+  - Imagrn lugsr 60.jpg
+  - Imagrn lugsr 61.jpg
+  - Imagrn lugsr 62.jpg
+  - Imagrn lugsr 63.jpg
+  - Imagrn lugsr 64.jpg
+  - Imagrn lugsr 65.jpg
+  - Imagrn lugsr 66.jpg
+  - Imagrn lugsr 67.jpg
+  - Imagrn lugsr 68.jpg
+  - Imagrn lugsr 69.jpg
+  - Imagrn lugsr 70.jpg
+  - Imagrn lugsr 71.jpg
+  - Imagrn lugsr 72.jpg
+  - Imagrn lugsr 73.jpg
+  - Imagrn lugsr 74.jpg
+  - Imagrn lugsr 75.jpg
+  - Imagrn lugsr 76.jpg
+  - Imagrn lugsr 77.jpg
+  - Imagrn lugsr 78.jpg
+
+Afiches originales del restaurante (10):
+  - restaurante 1.jpg
+  - restaurante 2.jpg
+  - restaurante 3.jpg
+  - restaurante 4.jpg
+  - restaurante 5.jpg
+  - restaurante 6.jpg
+  - restaurante 7.jpg
+  - restaurante 8.jpg
+  - restaurante 9.jpg
+  - restaurante 10.jpg
+
+Videos originales (19):
+  - video lugar 14.mp4
+  - video lugar 15.mp4
+  - video lugar 16.mp4
+  - video lugar1.mp4
+  - video lugar10.mp4
+  - video lugar11.mp4
+  - video lugar12.mp4
+  - video lugar13.mp4
+  - video lugar2.mp4
+  - video lugar3.mp4
+  - video lugar4.mp4
+  - video lugar5.mp4
+  - video lugar6.mp4
+  - video lugar7.mp4
+  - video lugar8.mp4
+  - video lugar9.mp4
+  - video1.mp4
+  - video1vertical.mp4
+  - video2.mp4
+
+Logos originales (5):
+  - isotipo-transparente.png
+  - logo.jpg
+  - logo2.jpg
+  - logo3.jpg
+  - logo4.jpg
+
+Piezas gráficas originales (6):
+  - bienvenido.jpg
+  - cabalante menu.jpg
+  - experiencias.jpg
+  - flyer1.jpg
+  - reglas piscina.jpg
+  - sauna y turcos.jpg
