@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Panel del propietario | Hotel Cabaleón</title>
+    <meta name="theme-color" content="#0A212E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <script src="tailwindcss.js"></script>
+    <script src="lucide.min.js"></script><!-- Íconos Lucide 1.47.0 -->
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink: '#0A212E',
+                        'ink-soft': '#16323F',
+                        brass: '#C9A063',
+                        'brass-deep': '#A8834A',
+                        bone: '#F7F5F0',
+                        sand: '#EDE7DD',
+                        moss: '#4E6B4F',
+                        graphite: '#20292E',
+                        line: 'rgba(10, 33, 46, 0.13)',
+                        'line-light': 'rgba(255, 255, 255, 0.16)'
+                    },
+                    fontFamily: {
+                        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --ink: #0A212E;
+            --brass: #C9A063;
+            --bone: #F7F5F0;
+            --line: rgba(10, 33, 46, 0.13);
+        }
+        html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { background: var(--bone); color: #20292E; font-family: Inter, system-ui, sans-serif; font-weight: 300; }
+        h1, h2, h3, .font-display { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 300; }
+        ::selection { background: var(--brass); color: #fff; }
+
+        .micro {
+            font-size: 0.6rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .eyebrow {
+            display: inline-flex; align-items: center; gap: 0.8rem;
+            font-size: 0.58rem; font-weight: 600; letter-spacing: 0.3em;
+            text-transform: uppercase; color: var(--brass);
+        }
+        .eyebrow::before { content: ""; width: 28px; height: 1px; background: currentColor; opacity: .65; }
+
+        .field-input {
+            width: 100%;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 2px;
+            padding: 0.85rem 1rem;
+            font-size: 0.9rem;
+            color: var(--ink);
+            transition: border-color .3s;
+        }
+        .field-input:focus { outline: none; border-color: var(--brass); }
+        .field-label {
+            display: block;
+            font-size: 0.55rem;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: rgba(10,33,46,.5);
+            margin-bottom: 0.5rem;
+        }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+            padding: 0.9rem 1.7rem;
+            font-size: 0.64rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+            border: 1px solid transparent; border-radius: 2px; cursor: pointer;
+            transition: background-color .35s, color .35s, border-color .35s;
+        }
+        .btn-ink { background: var(--ink); color: #fff; }
+        .btn-ink:hover { background: var(--brass); color: var(--ink); }
+        .btn-outline { border-color: var(--line); color: var(--ink); background: transparent; }
+        .btn-outline:hover { border-color: var(--ink); }
+        .btn-sm { padding: 0.6rem 1.1rem; font-size: 0.58rem; }
+
+        .nav-item {
+            display: flex; align-items: center; gap: 0.85rem;
+            padding: 0.7rem 1rem;
+            font-size: 0.78rem; font-weight: 400;
+            color: rgba(255,255,255,.55);
+            border-left: 2px solid transparent;
+            cursor: pointer;
+            transition: color .3s, background-color .3s, border-color .3s;
+        }
+        .nav-item:hover { color: #fff; background: rgba(255,255,255,.04); }
+        .nav-item.is-active { color: #fff; background: rgba(255,255,255,.06); border-left-color: var(--brass); }
+
+        .view { display: none; }
+        .view.is-active { display: block; animation: fade .4s ease both; }
+        @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+        .card { background: #fff; border: 1px solid var(--line); border-radius: 3px; }
+
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table th, .data-table td {
+            text-align: left; padding: 0.9rem 1rem; font-size: 0.82rem;
+            border-bottom: 1px solid var(--line); white-space: nowrap;
+        }
+        .data-table th {
+            font-size: 0.54rem; letter-spacing: 0.2em; text-transform: uppercase;
+            font-weight: 600; color: rgba(10,33,46,.42);
+        }
+        .data-table tbody tr:hover { background: var(--bone); }
+        .data-table tbody tr:last-child td { border-bottom: none; }
+
+        .pill {
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            padding: 0.2rem 0.6rem; border-radius: 999px;
+            font-size: 0.58rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+        }
+        .pill-green { background: rgba(78,107,79,.12); color: #3d5a3e; }
+        .pill-amber { background: rgba(201,160,99,.16); color: #8a6a34; }
+        .pill-red { background: rgba(160,60,60,.12); color: #8a3d3d; }
+        .pill-gray { background: rgba(10,33,46,.08); color: rgba(10,33,46,.6); }
+
+        .chip {
+            padding: 0.4rem 0.85rem; border: 1px solid var(--line);
+            font-size: 0.62rem; font-weight: 600; letter-spacing: 0.08em;
+            color: rgba(10,33,46,.55); background: transparent; cursor: pointer;
+            transition: background-color .3s, color .3s, border-color .3s;
+        }
+        .chip:hover { border-color: var(--ink); color: var(--ink); }
+        .chip.is-active { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+        .cal-day {
+            aspect-ratio: 1; display: flex; flex-direction: column; gap: 2px;
+            align-items: center; justify-content: center;
+            border: 1px solid var(--line); font-size: 0.75rem;
+        }
+        .cal-day.is-muted { color: rgba(10,33,46,.25); background: var(--bone); }
+        .cal-day.is-full { background: rgba(160,60,60,.1); color: #8a3d3d; font-weight: 600; }
+        .cal-day.is-partial { background: rgba(201,160,99,.14); color: #8a6a34; font-weight: 600; }
+
+        #app { display: none; }
+        #app.is-shown { display: block; }
+        @media (min-width: 1024px) {
+            #app.is-shown { display: grid; grid-template-columns: 260px 1fr; }
+        }
+
+        #sidebar { transition: transform .4s cubic-bezier(.16,1,.3,1); }
+        @media (max-width: 1023px) {
+            #sidebar { position: fixed; inset: 0 auto 0 0; z-index: 60; transform: translateX(-100%); }
+            #sidebar.is-open { transform: none; }
+        }
+
+        #toast {
+            position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(6rem);
+            background: var(--ink); color: #fff; padding: 0.9rem 1.4rem;
+            font-size: 0.8rem; border: 1px solid rgba(255,255,255,.15);
+            opacity: 0; transition: all .4s cubic-bezier(.16,1,.3,1); z-index: 90;
+            display: flex; align-items: center; gap: 0.6rem;
+        }
+        #toast.is-visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+    </style>
+</head>
+<body>
+
+    <!-- ================= AVISO DE CONSTRUCCIÓN ================= -->
+    <div class="bg-brass/20 border-b border-brass/40 text-ink text-center py-2 px-4 text-[0.68rem] tracking-wide flex items-center justify-center gap-2">
+        <i data-lucide="hard-hat" class="w-3.5 h-3.5"></i>
+        Entorno de construcción · el acceso todavía no está protegido. Puedes entrar al panel sin correo.
+    </div>
+
+    <!-- ================= LOGIN ================= -->
+    <div id="login" class="min-h-[calc(100vh-33px)] grid lg:grid-cols-2">
+
+        <!-- Columna visual -->
+        <div class="hidden lg:flex flex-col justify-between bg-ink text-white p-14 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-25" style="background-image:url('foto-complejo-montanas.jpg'); background-size:cover; background-position:center;"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/30"></div>
+            <div class="relative flex items-center gap-3">
+                <img src="logo-blanco.png" alt="Hotel Cabaleón" class="h-16 w-auto object-contain">
+                <span class="flex flex-col leading-none">
+                    <span class="font-display text-2xl tracking-[0.2em] uppercase">Cabaleón</span>
+                    <span class="text-[0.5rem] tracking-[0.4em] uppercase mt-1.5 text-white/50">Hotel · Tena</span>
+                </span>
+            </div>
+            <div class="relative">
+                <span class="eyebrow mb-6">Panel del propietario</span>
+                <h1 class="font-display text-4xl xl:text-5xl leading-tight mb-5">
+                    La operación del hotel,<br><em class="italic text-white/80">en un solo lugar</em>
+                </h1>
+                <p class="text-white/60 text-sm max-w-md leading-relaxed">
+                    Reservas, disponibilidad, tarifas y mensajes de huéspedes. Un espacio privado
+                    para administrar Hotel Cabaleón día a día.
+                </p>
+            </div>
+            <p class="relative text-[0.68rem] text-white/35 tracking-wide">&copy; 2026 Hotel Cabaleón · Tena, Cundinamarca</p>
+        </div>
+
+        <!-- Formulario -->
+        <div class="flex items-center justify-center p-6 sm:p-12">
+            <div class="w-full max-w-sm">
+                <div class="lg:hidden flex items-center gap-3 mb-10">
+                    <img src="logo-azul.png" alt="Hotel Cabaleón" class="h-14 w-auto object-contain">
+                    <span class="font-display text-xl tracking-[0.2em] uppercase text-ink">Cabaleón</span>
+                </div>
+
+                <span class="eyebrow mb-5">Acceso privado</span>
+                <h2 class="font-display text-3xl text-ink mb-2">Ingresa a tu panel</h2>
+                <p class="text-sm text-graphite/60 mb-9">Usa el correo del propietario del hotel.</p>
+
+                <form id="login-form" class="space-y-5" novalidate>
+                    <div>
+                        <label class="field-label" for="email">Correo</label>
+                        <div class="relative">
+                            <i data-lucide="mail" class="w-4 h-4 text-graphite/35 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                            <input id="email" type="email" autocomplete="email" required
+                                   class="field-input pl-10" placeholder="propietario@hotelcabaleon.com">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="field-label" for="password">Contraseña</label>
+                        <div class="relative">
+                            <i data-lucide="lock" class="w-4 h-4 text-graphite/35 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                            <input id="password" type="password" autocomplete="current-password"
+                                   class="field-input pl-10 pr-10" placeholder="••••••••">
+                            <button type="button" id="toggle-pw" aria-label="Mostrar contraseña"
+                                    class="absolute right-3 top-1/2 -translate-y-1/2 text-graphite/35 hover:text-ink transition-colors">
+                                <i data-lucide="eye" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                        <p class="text-[0.7rem] text-graphite/40 mt-2">Durante la construcción, el correo y la contraseña son opcionales.</p>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-1">
+                        <label class="flex items-center gap-2 text-[0.78rem] text-graphite/60 cursor-pointer">
+                            <input type="checkbox" id="remember" class="accent-ink w-3.5 h-3.5"> Mantener la sesión
+                        </label>
+                        <a href="#" class="text-[0.78rem] text-brass-deep hover:text-ink transition-colors">¿Olvidaste la contraseña?</a>
+                    </div>
+
+                    <button type="submit" class="btn btn-ink w-full">
+                        Entrar al panel <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                    <p id="login-error" class="hidden text-[0.78rem] text-[#8a3d3d] text-center"></p>
+                </form>
+
+                <div class="mt-10 pt-6 border-t border-line flex items-center justify-between text-[0.78rem]">
+                    <a href="index.html" class="text-graphite/55 hover:text-ink transition-colors inline-flex items-center gap-2">
+                        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Volver al sitio
+                    </a>
+                    <span class="text-graphite/35">v0.1 · interno</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PANEL ================= -->
+    <div id="app" class="min-h-[calc(100vh-33px)]">
+
+        <!-- Sidebar -->
+        <aside id="sidebar" class="bg-ink text-white w-[260px] flex flex-col">
+            <div class="p-6 border-b border-line-light flex items-center gap-3">
+                <img src="logo-blanco.png" alt="Hotel Cabaleón" class="h-12 w-auto object-contain">
+                <span class="flex flex-col leading-none">
+                    <span class="font-display text-lg tracking-[0.2em] uppercase">Cabaleón</span>
+                    <span class="text-[0.45rem] tracking-[0.35em] uppercase mt-1 text-white/45">Panel · Tena</span>
+                </span>
+            </div>
+
+            <nav class="flex-1 py-4">
+                <span class="block px-5 pb-2 pt-3 micro text-white/30">General</span>
+                <a class="nav-item is-active" data-view="resumen"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Resumen</a>
+                <a class="nav-item" data-view="reservas"><i data-lucide="calendar-check" class="w-4 h-4"></i> Reservas</a>
+                <a class="nav-item" data-view="disponibilidad"><i data-lucide="calendar-days" class="w-4 h-4"></i> Disponibilidad</a>
+                <span class="block px-5 pb-2 pt-5 micro text-white/30">Hotel</span>
+                <a class="nav-item" data-view="habitaciones"><i data-lucide="bed-double" class="w-4 h-4"></i> Habitaciones y tarifas</a>
+                <a class="nav-item" data-view="mensajes"><i data-lucide="message-square" class="w-4 h-4"></i> Mensajes <span id="msg-badge" class="ml-auto pill pill-amber">3</span></a>
+                <a class="nav-item" data-view="ajustes"><i data-lucide="settings" class="w-4 h-4"></i> Ajustes</a>
+            </nav>
+
+            <div class="p-4 border-t border-line-light">
+                <div class="flex items-center gap-3 px-2 py-2">
+                    <span class="w-9 h-9 rounded-full bg-brass/20 text-brass flex items-center justify-center font-display text-lg shrink-0">J</span>
+                    <span class="min-w-0">
+                        <span class="block text-[0.8rem] text-white truncate">Propietario</span>
+                        <span id="side-email" class="block text-[0.68rem] text-white/40 truncate">—</span>
+                    </span>
+                </div>
+                <button onclick="logout()" class="nav-item w-full mt-1"><i data-lucide="log-out" class="w-4 h-4"></i> Cerrar sesión</button>
+            </div>
+        </aside>
+
+        <!-- Contenido -->
+        <div class="flex flex-col min-w-0">
+
+            <!-- Topbar -->
+            <header class="bg-white border-b border-line px-5 sm:px-8 py-4 flex items-center justify-between gap-4 sticky top-0 z-40">
+                <div class="flex items-center gap-3 min-w-0">
+                    <button onclick="toggleSidebar()" class="lg:hidden text-ink" aria-label="Menú"><i data-lucide="menu" class="w-5 h-5"></i></button>
+                    <div class="min-w-0">
+                        <h1 id="view-title" class="font-display text-2xl text-ink leading-none">Resumen</h1>
+                        <p id="view-date" class="text-[0.7rem] text-graphite/45 mt-1">—</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <a href="index.html" target="_blank" class="btn btn-outline btn-sm hidden sm:inline-flex">
+                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Ver sitio
+                    </a>
+                    <button onclick="toast('En construcción: aún no se envían notificaciones.')" class="w-9 h-9 border border-line flex items-center justify-center text-ink hover:bg-bone transition-colors relative">
+                        <i data-lucide="bell" class="w-4 h-4"></i>
+                        <span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-brass rounded-full"></span>
+                    </button>
+                </div>
+            </header>
+
+            <main class="p-5 sm:p-8 flex-1 max-w-[1200px] w-full">
+
+                <!-- ---------- RESUMEN ---------- -->
+                <section class="view is-active" data-view="resumen">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+                        <div class="card p-5">
+                            <span class="micro text-graphite/40">Reservas este mes</span>
+                            <div class="flex items-end gap-2 mt-3">
+                                <span class="font-display text-4xl text-ink leading-none">18</span>
+                                <span class="pill pill-green mb-1"><i data-lucide="trending-up" class="w-3 h-3"></i> +4</span>
+                            </div>
+                        </div>
+                        <div class="card p-5">
+                            <span class="micro text-graphite/40">Ocupación media</span>
+                            <div class="flex items-end gap-2 mt-3">
+                                <span class="font-display text-4xl text-ink leading-none">64%</span>
+                                <span class="pill pill-green mb-1"><i data-lucide="trending-up" class="w-3 h-3"></i> +7</span>
+                            </div>
+                        </div>
+                        <div class="card p-5">
+                            <span class="micro text-graphite/40">Ingresos estimados</span>
+                            <div class="mt-3">
+                                <span class="font-display text-3xl text-ink leading-none">$6.480.000</span>
+                                <span class="block text-[0.68rem] text-graphite/45 mt-1">COP · mes en curso</span>
+                            </div>
+                        </div>
+                        <div class="card p-5">
+                            <span class="micro text-graphite/40">Mensajes sin responder</span>
+                            <div class="flex items-end gap-2 mt-3">
+                                <span class="font-display text-4xl text-ink leading-none">3</span>
+                                <span class="pill pill-amber mb-1">Pendiente</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2 card">
+                            <div class="flex items-center justify-between p-5 border-b border-line">
+                                <h3 class="font-display text-xl text-ink">Próximas llegadas</h3>
+                                <button class="chip" onclick="nav('reservas')">Ver todas</button>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr><th>Huésped</th><th>Habitación</th><th>Entrada</th><th>Noches</th><th>Estado</th></tr>
+                                    </thead>
+                                    <tbody id="llegadas-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card p-5">
+                            <h3 class="font-display text-xl text-ink mb-5">Ocupación por habitación</h3>
+                            <div class="space-y-5" id="ocupacion-body"></div>
+                            <div class="mt-6 pt-5 border-t border-line">
+                                <h4 class="micro text-graphite/40 mb-4">Actividad reciente</h4>
+                                <ul class="space-y-3.5" id="actividad-body"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ---------- RESERVAS ---------- -->
+                <section class="view" data-view="reservas">
+                    <div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-5">
+                        <div class="flex flex-wrap gap-2" id="reserva-filtros">
+                            <button class="chip is-active" data-estado="todas">Todas</button>
+                            <button class="chip" data-estado="Pendiente">Pendientes</button>
+                            <button class="chip" data-estado="Confirmada">Confirmadas</button>
+                            <button class="chip" data-estado="Cancelada">Canceladas</button>
+                        </div>
+                        <div class="relative sm:ml-auto">
+                            <i data-lucide="search" class="w-4 h-4 text-graphite/35 absolute left-3 top-1/2 -translate-y-1/2"></i>
+                            <input id="reserva-buscar" type="search" placeholder="Buscar huésped…" class="field-input pl-9 py-2 text-sm sm:w-64">
+                        </div>
+                        <button class="btn btn-ink btn-sm" onclick="toast('En construcción: alta manual de reservas.')">
+                            <i data-lucide="plus" class="w-3.5 h-3.5"></i> Nueva
+                        </button>
+                    </div>
+
+                    <div class="card overflow-x-auto">
+                        <table class="data-table">
+                            <thead>
+                                <tr><th>Huésped</th><th>Habitación</th><th>Fechas</th><th>Huéspedes</th><th>Canal</th><th>Total</th><th>Estado</th></tr>
+                            </thead>
+                            <tbody id="reservas-body"></tbody>
+                        </table>
+                    </div>
+                    <p id="reservas-vacio" class="hidden text-center text-sm text-graphite/45 py-10">No hay reservas con ese criterio.</p>
+                </section>
+
+                <!-- ---------- DISPONIBILIDAD ---------- -->
+                <section class="view" data-view="disponibilidad">
+                    <div class="card p-5 sm:p-7">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="font-display text-2xl text-ink">Septiembre 2026</h3>
+                            <div class="flex gap-2">
+                                <button class="w-9 h-9 border border-line flex items-center justify-center text-ink hover:bg-bone transition-colors" onclick="toast('En construcción: navegación entre meses.')"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+                                <button class="w-9 h-9 border border-line flex items-center justify-center text-ink hover:bg-bone transition-colors" onclick="toast('En construcción: navegación entre meses.')"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1.5 text-center mb-1.5">
+                            <span class="micro text-graphite/35">L</span><span class="micro text-graphite/35">M</span><span class="micro text-graphite/35">M</span>
+                            <span class="micro text-graphite/35">J</span><span class="micro text-graphite/35">V</span><span class="micro text-graphite/35">S</span><span class="micro text-graphite/35">D</span>
+                        </div>
+                        <div class="grid grid-cols-7 gap-1.5" id="calendario"></div>
+                        <div class="flex flex-wrap gap-5 mt-6 pt-5 border-t border-line text-[0.72rem] text-graphite/55">
+                            <span class="flex items-center gap-2"><span class="w-3 h-3 border border-line bg-white"></span> Disponible</span>
+                            <span class="flex items-center gap-2"><span class="w-3 h-3 bg-[rgba(201,160,99,.3)]"></span> Ocupación parcial</span>
+                            <span class="flex items-center gap-2"><span class="w-3 h-3 bg-[rgba(160,60,60,.25)]"></span> Completo</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ---------- HABITACIONES ---------- -->
+                <section class="view" data-view="habitaciones">
+                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5" id="habitaciones-body"></div>
+                    <div class="mt-6 flex justify-end">
+                        <button class="btn btn-ink" onclick="toast('En construcción: los cambios todavía no se guardan.')">
+                            <i data-lucide="save" class="w-4 h-4"></i> Guardar cambios
+                        </button>
+                    </div>
+                </section>
+
+                <!-- ---------- MENSAJES ---------- -->
+                <section class="view" data-view="mensajes">
+                    <div class="card divide-y divide-line" id="mensajes-body"></div>
+                </section>
+
+                <!-- ---------- AJUSTES ---------- -->
+                <section class="view" data-view="ajustes">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="card p-6">
+                            <h3 class="font-display text-xl text-ink mb-1">Datos del hotel</h3>
+                            <p class="text-[0.78rem] text-graphite/50 mb-6">Se usan en la página pública y en las confirmaciones.</p>
+                            <div class="space-y-4">
+                                <div><label class="field-label">Nombre</label><input class="field-input" value="Hotel Cabaleón"></div>
+                                <div><label class="field-label">Correo</label><input class="field-input" value="informacion@hotelcabaleon.com"></div>
+                                <div><label class="field-label">Teléfono y WhatsApp</label><input class="field-input" value="311 888 4430"></div>
+                                <div><label class="field-label">Dirección</label><input class="field-input" value="Ramal de Escalante, Vereda Escalante, Tena, Cundinamarca"></div>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div><label class="field-label">Check-in</label><input class="field-input" value="15:00"></div>
+                                    <div><label class="field-label">Check-out</label><input class="field-input" value="14:00"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn-ink btn-sm mt-6" onclick="toast('En construcción: los ajustes no se guardan todavía.')">Guardar</button>
+                        </div>
+
+                        <div class="card p-6">
+                            <h3 class="font-display text-xl text-ink mb-1">Cuenta del propietario</h3>
+                            <p class="text-[0.78rem] text-graphite/50 mb-6">Acceso al panel. La autenticación real se conecta más adelante.</p>
+                            <div class="space-y-4">
+                                <div><label class="field-label">Correo de acceso</label><input id="ajuste-email" class="field-input" value="—"></div>
+                                <div><label class="field-label">Contraseña</label><input class="field-input" type="password" value="········" disabled></div>
+                            </div>
+                            <div class="mt-6 p-4 bg-bone border border-line text-[0.78rem] text-graphite/60 flex gap-3">
+                                <i data-lucide="info" class="w-4 h-4 text-brass shrink-0 mt-0.5"></i>
+                                Cuando el panel salga de construcción se añadirá inicio de sesión con contraseña,
+                                verificación por correo y registro de accesos.
+                            </div>
+                            <button class="btn btn-outline btn-sm mt-5" disabled>Cambiar contraseña</button>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <div id="sidebar-scrim" class="hidden fixed inset-0 bg-ink/50 z-50 lg:hidden" onclick="toggleSidebar()"></div>
+
+    <div id="toast"><i data-lucide="check" class="w-4 h-4 text-brass"></i><span id="toast-text"></span></div>
+
+    <script>
+        /* =========================================================
+           Datos de ejemplo (se reemplazan al conectar el backend)
+           ========================================================= */
+        const reservas = [
+            { huesped: 'Alexi García',        hab: 'Suite Cabaleón',      inicio: '05 sep', fin: '07 sep', noches: 2, personas: 2, canal: 'WhatsApp', total: '$1.030.000', estado: 'Confirmada' },
+            { huesped: 'Diana Alarcón Roa',   hab: 'Estándar Triple',     inicio: '06 sep', fin: '08 sep', noches: 2, personas: 3, canal: 'Sitio web', total: '$680.000',   estado: 'Confirmada' },
+            { huesped: 'German Manrique',     hab: 'Familiar Cuádruple',  inicio: '12 sep', fin: '15 sep', noches: 3, personas: 4, canal: 'WhatsApp', total: '$1.180.000', estado: 'Pendiente'  },
+            { huesped: 'Laura Ospina',        hab: 'Cabaña Cabaleón',     inicio: '13 sep', fin: '14 sep', noches: 1, personas: 2, canal: 'Teléfono', total: '$410.000',   estado: 'Pendiente'  },
+            { huesped: 'Familia Rincón',      hab: 'Familiar Cuádruple',  inicio: '19 sep', fin: '22 sep', noches: 3, personas: 4, canal: 'Sitio web', total: '$1.180.000', estado: 'Confirmada' },
+            { huesped: 'Camilo Vega',         hab: 'Estándar Triple',     inicio: '20 sep', fin: '21 sep', noches: 1, personas: 2, canal: 'WhatsApp', total: '$340.000',   estado: 'Cancelada'  },
+            { huesped: 'Mónica Salazar',      hab: 'Suite Cabaleón',      inicio: '26 sep', fin: '29 sep', noches: 3, personas: 2, canal: 'Sitio web', total: '$1.500.000', estado: 'Confirmada' },
+            { huesped: 'Andrés Beltrán',      hab: 'Estándar Triple',     inicio: '27 sep', fin: '28 sep', noches: 1, personas: 3, canal: 'WhatsApp', total: '$340.000',   estado: 'Pendiente'  }
+        ];
+
+        const ocupacion = [
+            { nombre: 'Suite Cabaleón', valor: 72 },
+            { nombre: 'Cabaña Cabaleón', valor: 66 },
+            { nombre: 'Familiar Cuádruple', valor: 61 },
+            { nombre: 'Estándar Triple', valor: 58 }
+        ];
+
+        const actividad = [
+            { icono: 'calendar-plus', texto: 'Nueva reserva de Mónica Salazar', hace: 'hace 2 h' },
+            { icono: 'message-square', texto: 'Mensaje nuevo por WhatsApp', hace: 'hace 5 h' },
+            { icono: 'check-circle',  texto: 'Reserva de Alexi García confirmada', hace: 'ayer' },
+            { icono: 'x-circle',      texto: 'Camilo Vega canceló su reserva', hace: 'hace 2 días' }
+        ];
+
+        // Mismas tarifas que `TARIFAS` en index.html (finde: viernes, sábado y víspera de festivo)
+        const habitaciones = [
+            { nombre: 'Suite Cabaleón', cap: 4, finde: 560000, semana: 470000, activa: true },
+            { nombre: 'Cabaña Cabaleón', cap: 2, finde: 490000, semana: 410000, activa: true },
+            { nombre: 'Habitación Familiar Cuádruple', cap: 4, finde: 440000, semana: 370000, activa: true },
+            { nombre: 'Habitación Estándar Triple', cap: 3, finde: 400000, semana: 340000, activa: true }
+        ];
+
+        const mensajes = [
+            { nombre: 'Paula Girón',   canal: 'WhatsApp', hace: 'hace 1 h', texto: 'Hola, ¿tienen disponibilidad para 2 personas el fin de semana del 20? Gracias.', leido: false },
+            { nombre: 'Jorge Medina',  canal: 'Correo',   hace: 'hace 4 h', texto: '¿El desayuno incluye opciones sin gluten? Viajamos con un niño.', leido: false },
+            { nombre: 'Sara Cardona',  canal: 'WhatsApp', hace: 'ayer',      texto: '¿Se puede llegar en carro particular hasta el hotel? ¿Cómo está la vía?', leido: false },
+            { nombre: 'Tomás Ruiz',    canal: 'Correo',   hace: 'hace 3 días', texto: 'Gracias por la estadía, todo excelente. ¿Me pueden enviar la factura?', leido: true }
+        ];
+
+        const COP = n => '$' + n.toLocaleString('es-CO');
+
+        /* =========================================================
+           Login (sin autenticación durante la construcción)
+           ========================================================= */
+        const loginForm = document.getElementById('login-form');
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const err = document.getElementById('login-error');
+            // Durante la construcción el correo es opcional: vacío entra como invitado
+            if (email && !/^\S+@\S+\.\S+$/.test(email)) {
+                err.textContent = 'Escribe un correo válido o deja el campo vacío.';
+                err.classList.remove('hidden');
+                return;
+            }
+            err.classList.add('hidden');
+            enterPanel(email || 'Acceso de prueba');
+        });
+
+        document.getElementById('toggle-pw').addEventListener('click', () => {
+            const pw = document.getElementById('password');
+            pw.type = pw.type === 'password' ? 'text' : 'password';
+            lucide.createIcons();
+        });
+
+        function enterPanel(email) {
+            document.getElementById('side-email').textContent = email;
+            document.getElementById('ajuste-email').value = email;
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('app').classList.add('is-shown');
+            document.getElementById('view-date').textContent = capitalize(
+                new Date().toLocaleDateString('es-CO', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
+            );
+            renderAll();
+            lucide.createIcons();
+            window.scrollTo(0, 0);
+        }
+
+        function logout() {
+            document.getElementById('app').classList.remove('is-shown');
+            document.getElementById('login').style.display = '';
+            document.getElementById('password').value = '';
+            window.scrollTo(0, 0);
+        }
+
+        const capitalize = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+        /* =========================================================
+           Navegación entre vistas
+           ========================================================= */
+        const titulos = {
+            resumen: 'Resumen',
+            reservas: 'Reservas',
+            disponibilidad: 'Disponibilidad',
+            habitaciones: 'Habitaciones y tarifas',
+            mensajes: 'Mensajes',
+            ajustes: 'Ajustes'
+        };
+
+        function nav(view) {
+            document.querySelectorAll('.nav-item[data-view]').forEach(n => n.classList.toggle('is-active', n.dataset.view === view));
+            document.querySelectorAll('.view').forEach(v => v.classList.toggle('is-active', v.dataset.view === view));
+            document.getElementById('view-title').textContent = titulos[view] || '';
+            if (window.innerWidth < 1024) closeSidebar();
+            window.scrollTo(0, 0);
+        }
+
+        document.querySelectorAll('.nav-item[data-view]').forEach(n => {
+            n.addEventListener('click', () => nav(n.dataset.view));
+        });
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('is-open');
+            document.getElementById('sidebar-scrim').classList.toggle('hidden');
+        }
+        function closeSidebar() {
+            document.getElementById('sidebar').classList.remove('is-open');
+            document.getElementById('sidebar-scrim').classList.add('hidden');
+        }
+
+        /* =========================================================
+           Render de cada sección
+           ========================================================= */
+        function estadoPill(estado) {
+            const map = { Confirmada: 'pill-green', Pendiente: 'pill-amber', Cancelada: 'pill-red' };
+            return `<span class="pill ${map[estado] || 'pill-gray'}">${estado}</span>`;
+        }
+
+        function renderLlegadas() {
+            document.getElementById('llegadas-body').innerHTML = reservas
+                .filter(r => r.estado !== 'Cancelada')
+                .slice(0, 5)
+                .map(r => `<tr>
+                    <td class="text-ink">${r.huesped}</td>
+                    <td class="text-graphite/70">${r.hab}</td>
+                    <td class="text-graphite/70">${r.inicio}</td>
+                    <td class="text-graphite/70">${r.noches}</td>
+                    <td>${estadoPill(r.estado)}</td>
+                </tr>`).join('');
+        }
+
+        function renderOcupacion() {
+            document.getElementById('ocupacion-body').innerHTML = ocupacion.map(o => `
+                <div>
+                    <div class="flex justify-between text-[0.78rem] mb-1.5">
+                        <span class="text-graphite/70">${o.nombre}</span>
+                        <span class="text-ink font-medium">${o.valor}%</span>
+                    </div>
+                    <div class="h-1.5 bg-bone overflow-hidden">
+                        <div class="h-full bg-brass" style="width:${o.valor}%"></div>
+                    </div>
+                </div>`).join('');
+        }
+
+        function renderActividad() {
+            document.getElementById('actividad-body').innerHTML = actividad.map(a => `
+                <li class="flex items-start gap-3">
+                    <i data-lucide="${a.icono}" class="w-3.5 h-3.5 text-brass shrink-0 mt-0.5"></i>
+                    <span class="text-[0.78rem] text-graphite/70 leading-snug">${a.texto}
+                        <span class="block text-graphite/35 text-[0.68rem]">${a.hace}</span>
+                    </span>
+                </li>`).join('');
+        }
+
+        let filtroReserva = 'todas';
+        function renderReservas() {
+            const q = (document.getElementById('reserva-buscar').value || '').toLowerCase();
+            const filas = reservas.filter(r =>
+                (filtroReserva === 'todas' || r.estado === filtroReserva) &&
+                r.huesped.toLowerCase().includes(q)
+            );
+            document.getElementById('reservas-body').innerHTML = filas.map(r => `<tr>
+                <td class="text-ink">${r.huesped}</td>
+                <td class="text-graphite/70">${r.hab}</td>
+                <td class="text-graphite/70">${r.inicio} – ${r.fin}</td>
+                <td class="text-graphite/70">${r.personas}</td>
+                <td class="text-graphite/70">${r.canal}</td>
+                <td class="text-graphite/70">${r.total}</td>
+                <td>${estadoPill(r.estado)}</td>
+            </tr>`).join('');
+            document.getElementById('reservas-vacio').classList.toggle('hidden', filas.length > 0);
+        }
+
+        document.getElementById('reserva-filtros').addEventListener('click', (e) => {
+            const btn = e.target.closest('.chip');
+            if (!btn) return;
+            filtroReserva = btn.dataset.estado;
+            document.querySelectorAll('#reserva-filtros .chip').forEach(c => c.classList.toggle('is-active', c === btn));
+            renderReservas();
+        });
+        document.getElementById('reserva-buscar').addEventListener('input', renderReservas);
+
+        function renderHabitaciones() {
+            document.getElementById('habitaciones-body').innerHTML = habitaciones.map((h, i) => `
+                <div class="card p-5">
+                    <div class="flex items-start justify-between gap-3 mb-4">
+                        <h3 class="font-display text-lg text-ink leading-tight">${h.nombre}</h3>
+                        <span class="pill ${h.activa ? 'pill-green' : 'pill-gray'}">${h.activa ? 'Activa' : 'Inactiva'}</span>
+                    </div>
+                    <p class="micro text-graphite/40 mb-4">Capacidad · ${h.cap} huéspedes</p>
+                    <label class="field-label">Fin de semana y festivos (COP)</label>
+                    <input class="field-input mb-3" type="number" value="${h.finde}" data-room="${i}" data-tipo="finde">
+                    <label class="field-label">Domingo a jueves (COP)</label>
+                    <input class="field-input mb-4" type="number" value="${h.semana}" data-room="${i}" data-tipo="semana">
+                    <label class="flex items-center gap-2 text-[0.8rem] text-graphite/65 cursor-pointer">
+                        <input type="checkbox" class="accent-ink w-3.5 h-3.5" ${h.activa ? 'checked' : ''} onchange="toast('En construcción: el estado no se guarda todavía.')">
+                        Disponible para reservar
+                    </label>
+                </div>`).join('');
+        }
+
+        function renderMensajes() {
+            document.getElementById('mensajes-body').innerHTML = mensajes.map(m => `
+                <div class="p-5 flex gap-4 ${m.leido ? '' : 'bg-bone/60'}">
+                    <span class="w-9 h-9 rounded-full bg-ink/5 text-ink flex items-center justify-center font-display text-base shrink-0">${m.nombre.charAt(0)}</span>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex items-center gap-2 flex-wrap mb-1">
+                            <span class="text-[0.86rem] text-ink font-medium">${m.nombre}</span>
+                            <span class="pill pill-gray">${m.canal}</span>
+                            ${m.leido ? '' : '<span class="w-1.5 h-1.5 bg-brass rounded-full"></span>'}
+                            <span class="text-[0.68rem] text-graphite/40 ml-auto">${m.hace}</span>
+                        </div>
+                        <p class="text-[0.83rem] text-graphite/70 leading-snug mb-3">${m.texto}</p>
+                        <button class="btn btn-outline btn-sm" onclick="toast('En construcción: la respuesta se abrirá en WhatsApp / correo.')">
+                            <i data-lucide="reply" class="w-3.5 h-3.5"></i> Responder
+                        </button>
+                    </div>
+                </div>`).join('');
+        }
+
+        function renderCalendario() {
+            // Septiembre 2026 empieza en martes (getDay = 2). Rejilla Lun–Dom.
+            const offset = 1; // martes → una celda vacía antes
+            const dias = 30;
+            const full = [6, 7, 13, 14, 20, 21, 27, 28];
+            const partial = [5, 12, 19, 22, 26, 29];
+            let html = '';
+            for (let i = 0; i < offset; i++) html += '<div class="cal-day is-muted"></div>';
+            for (let d = 1; d <= dias; d++) {
+                let cls = 'cal-day';
+                let tag = '';
+                if (full.includes(d)) { cls += ' is-full'; tag = 'Lleno'; }
+                else if (partial.includes(d)) { cls += ' is-partial'; tag = '2 libres'; }
+                html += `<div class="${cls}"><span>${d}</span>${tag ? `<span class="text-[0.55rem] font-normal">${tag}</span>` : ''}</div>`;
+            }
+            document.getElementById('calendario').innerHTML = html;
+        }
+
+        function renderAll() {
+            renderLlegadas();
+            renderOcupacion();
+            renderActividad();
+            renderReservas();
+            renderHabitaciones();
+            renderMensajes();
+            renderCalendario();
+            lucide.createIcons();
+        }
+
+        /* =========================================================
+           Toast
+           ========================================================= */
+        let toastTimer;
+        function toast(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-text').textContent = msg;
+            t.classList.add('is-visible');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => t.classList.remove('is-visible'), 3200);
+        }
+
+        lucide.createIcons();
+    </script>
+</body>
+</html>
